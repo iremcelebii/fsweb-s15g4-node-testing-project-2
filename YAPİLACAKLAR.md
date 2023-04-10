@@ -140,6 +140,12 @@
 14. npm run server ile server'ı ayağa kaldırabiliriz artık.
     postman'de klasörleri ve end pointleri oluşturalım, mesajları görelim
 
----
+15. migration dosyasını oluşturalım:
 
-14.
+    knex migrate:make twitter
+
+16. migration dosyasında tabloları oluştuyoruz
+
+17. seed dosyasını kendimiz oluştuyoruz twitter001.js
+
+18. seed dosyasında verileri oluştuyoruz
