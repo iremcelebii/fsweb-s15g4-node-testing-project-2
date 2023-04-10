@@ -1,4 +1,4 @@
-// const { JWT_SECRET } = require("../secrets"); // bu secreti kullanın!
+const { JWT_SECRET } = require("../secrets"); // bu secreti kullanın!
 const userModel = require("../users/users-model");
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -53,7 +53,7 @@ async function sifreYeterliMi(req, res, next) {
 }
 
 //!register/ozel için
-const rolAdiGecerlimi = async (req, res, next) => {
+const rolAdiKontrolu = async (req, res, next) => {
   try {
     if (req.body.role_name) {
       const trimliRoleName = req.body.role_name.trim().toLowerCase();
@@ -73,9 +73,78 @@ const rolAdiGecerlimi = async (req, res, next) => {
   }
 };
 
+//!login için
+const usernameVarmi = async (req, res, next) => {
+  try {
+    const { username } = req.body;
+    const varMi = await userModel.nameeGoreBul(username);
+    // console.log(varMi);
+    // console.log(username);
+    if (varMi !== undefined && varMi.username == username) {
+      next();
+    } else {
+      res.status(401).json({ message: "Kullanıcı adı veya şifre yanlış" });
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+//!login için
+async function sifreDogruMu(req, res, next) {
+  try {
+    const user = await userModel.nameeGoreSıfreBul(req.body.username);
+    // console.log(dbdekiSifre); SADECE ŞİFRE GELMİYORMUŞ BURADAN
+    if (bcryptjs.compareSync(req.body.password, user.password)) {
+      next();
+    } else {
+      res.status(401).json({ message: "Kullanıcı adı veya şifre yanlış" }); //yanlış şifre
+    }
+  } catch (err) {
+    next(err);
+  }
+}
+//!Giriş yapıldıktan sonra gidilebilecek end pointler için
+const tokenKontrolu = (req, res, next) => {
+  try {
+    const token = req.headers.authorization;
+    if (token) {
+      jwt.verify(token, JWT_SECRET, (err, decodedJWT) => {
+        if (err) {
+          res.status(401).json({ message: "Token gecersizdir" });
+        } else {
+          req.decodedJWT = decodedJWT;
+          console.log(req.decodedJWT);
+          next();
+        }
+      });
+    } else {
+      res.status(401).json({ message: "Token gereklidir" });
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+//!login olduktan sonraki end pointler için- rolü kontrol ediyoruz:
+const sadece = (role_name) => (req, res, next) => {
+  try {
+    if (req.decodedJWT && req.decodedJWT.role_name == role_name) {
+      next();
+    } else {
+      res.status(403).json({ message: "Bu, senin için değil" });
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   gerekliBilgilerVarMi,
   sifreYeterliMi,
-  rolAdiGecerlimi,
   usernameBostami,
+  rolAdiKontrolu,
+  usernameVarmi,
+  sifreDogruMu,
+  tokenKontrolu,
+  sadece,
 };
