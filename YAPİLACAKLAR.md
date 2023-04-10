@@ -180,6 +180,8 @@
 
 4.  oluşturduğumuz end pointin md lerini yazalım
 
+    Neleri kontrol etmeliyiz? 1. username, şifre vb. gerekli olanları girdi mi? 2. şifre yeterince güçlü mü? 3. girilen username de başka bir kullanıcı var mı? 4. rol ile ilgili kontroller
+
 5.  parolayı kriptolamamız gerek. Naıl yapacağız?
     ilk nerede parolayı alıyoruz?
     auth-router da register end pointinde
@@ -202,43 +204,47 @@
 
 6.  register end pointi bitti /api/auth/login 'e geçelim
 
-7.  önce isim veritabanında kayıtlı mı diye baktık
-
-8.  daha sonra şifre doğru mu diye baktık compareSync metoduyla
-
-9.  şimdi giriş yapılmış mı diye bakacağız
-
-10. npm i express-session -->session:bir kullanıcının bilgileri doğrulandıktan sonra oluşturulan oturum kaydı
-11. const session=require("express-session") --> server.js'de import et
-12. sessionConfig objesini oluştur
-    sessionConfig = {
-    name: "cikolatacips",
-    secret: "bla bla",
-    cookie: {
-    maxAge: 1000 \* 30,
-    secure: false,
-    },
-    httpOnly: true,
-    resave: false,
-    saveUninitialized: false,
+7.  token'ı bu end pointte tanımlıyoruz
+    const user = await userModel.nameeGoreBul(req.body.username);
+    const payload = {
+    subject: user.user_id,
+    username: user.username,
+    role_name: user.role_name,
     };
-13. server.use(session(sessionConfig)) --> express.json()'dan sonra yaz
-    login olduğum yerde (authRouter) req.session objesine giriş yapan kişinin idsini ekleyelim:
+    const secret = JWT_SECRET;
+    const options = { expiresIn: "1d" };
+    let token = jwt.sign(payload, secret, options);
 
-        const user = await userModel.nameeGoreBul(req.body.username);
-        req.session.user_id = user.user_id;
+8.  oluşturduğumuz end pointin md lerini yazalım
+    nelere bakacağız?
+    Böyle bir kullanıcı var mı?
+    Şifresini doğru yazmış mı?
 
-    authMd de giriş yapılı durumda mı kontrol etmeliyim:
+9.  Bu end pointlerin dışında auth md de 2 kontorl daha yaparız:
 
-    async function sinirli(req, res, next) {
-    try {
-    if (req.session && req.session.user_id) {
-    // console.log(req.session);
-    // console.log(req.session.user_id);
-    next();
-    } else {
-    next({status: 401,message: "Geçemezsiniz!",});}
-    } catch (error) {
-    next(error);}}
+    1. Giriş yapılmış mı?
 
-    bu md den geçmiyorsa users daki hiçbir işlemi yapamamalı o yüzden server.js de usersrouter ın önüne yazıyorum bu md yi
+    Bunu diğer end pointlerde kullanacağız
+    Giriş yapmadan yapmasını istemediğimiz işlemlerin önüne yazacağız
+
+        const tokenKontrolu = (req, res, next) => {
+        const token = req.headers.authorization;
+
+        if (token) {
+        jwt.verify(token, JWT_SECRET, (err, decodedJWT) => {
+            if (err) {
+                res.status(401).json({ message: "Token gecersizdir" });
+            } else {
+                 req.decodedJWT = decodedJWT;
+                console.log(req.decodedJWT);
+                next();}});}
+            else {
+        res.status(401).json({ message: "Token gereklidir" });}};
+
+        1. İstenen role sahip kullanıcı mı giriş yapmış?
+
+            const sadece = (role_name) => (req, res, next) => {
+            if (req.decodedJWT && req.decodedJWT.role_name == role_name) {
+                next();
+            }else {
+                res.status(403).json({ message: "Bu, senin için değil" });}};
