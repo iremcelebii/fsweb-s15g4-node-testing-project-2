@@ -39,16 +39,16 @@ exports.up = function (knex) {
         .notNullable()
         .references("user_id")
         .inTable("users")
-        .onUpdate("RESTRICT")
-        .onDelete("RESTRICT");
+        .onUpdate("CASCADE")
+        .onDelete("CASCADE");
       follow
         .integer("to_user_id")
         .unsigned()
         .notNullable()
         .references("user_id")
         .inTable("users")
-        .onUpdate("RESTRICT")
-        .onDelete("RESTRICT");
+        .onUpdate("CASCADE")
+        .onDelete("CASCADE");
     })
     .createTable("tweets", (tweets) => {
       tweets.increments("tweet_id");
@@ -59,8 +59,8 @@ exports.up = function (knex) {
         .notNullable()
         .references("user_id")
         .inTable("users")
-        .onUpdate("RESTRICT")
-        .onDelete("RESTRICT");
+        .onUpdate("CASCADE")
+        .onDelete("CASCADE");
     })
     .createTable("comments", (comments) => {
       comments.increments("comment_id");
@@ -71,16 +71,16 @@ exports.up = function (knex) {
         .notNullable()
         .references("user_id")
         .inTable("users")
-        .onUpdate("RESTRICT")
-        .onDelete("RESTRICT");
+        .onUpdate("CASCADE")
+        .onDelete("CASCADE");
       comments
         .integer("tweet_id")
         .unsigned()
         .notNullable()
         .references("tweet_id")
         .inTable("tweets")
-        .onUpdate("RESTRICT")
-        .onDelete("RESTRICT");
+        .onUpdate("CASCADE")
+        .onDelete("CASCADE");
     })
     .createTable("favs", (comments) => {
       comments.increments("fav_id");
@@ -90,16 +90,16 @@ exports.up = function (knex) {
         .notNullable()
         .references("user_id")
         .inTable("users")
-        .onUpdate("RESTRICT")
-        .onDelete("RESTRICT");
+        .onUpdate("CASCADE")
+        .onDelete("CASCADE");
       comments
         .integer("tweet_id")
         .unsigned()
         .notNullable()
         .references("tweet_id")
         .inTable("tweets")
-        .onUpdate("RESTRICT")
-        .onDelete("RESTRICT");
+        .onUpdate("CASCADE")
+        .onDelete("CASCADE");
     });
 };
 

@@ -1,7 +1,71 @@
 const db = require("../../data/db-config");
 const bcryptjs = require("bcryptjs");
-function bul() {
-  return db("users").select("user_id", "username");
+
+function bulGizli() {
+  return db("users")
+    .leftJoin("roles", "roles.role_id", "users.role_id")
+    .leftJoin("sorular", "sorular.soru_id", "users.soru_id")
+    .select(
+      "users.username",
+      "users.password",
+      "roles.role_name",
+      "sorular.soru_name as seçilen soru",
+      "users.soru_cevap as cevap"
+    );
+}
+
+function takipEdilenHesapla() {
+  return db("users")
+    .select("users.user_id", "users.username")
+    .leftJoin("follow", "users.user_id", "follow.to_user_id")
+    .count("follow.from_user_id as takipciSayisi")
+    .groupBy("users.user_id");
+}
+
+function takipciHesapla(username) {
+  return db("users")
+    .select("users.username")
+    .leftJoin("follow", "users.user_id", "follow.from_user_id")
+    .count("follow.to_user_id as takipEdilenSayisi")
+    .groupBy("users.user_id")
+    .where("users.username", username)
+    .first();
+}
+
+async function takipciVeTakipEdilenHesapla() {
+  let array = await takipEdilenHesapla();
+  for (let i = 0; i < array.length; i++) {
+    let obje = await takipciHesapla(array[i].username);
+    array[i] = {
+      ...array[i],
+      takipEdilenSayisi: obje.takipEdilenSayisi,
+    };
+  }
+
+  return array;
+}
+
+async function idyegoretakipciVeTakipEdilenHesapla(userId) {
+  let array = await takipciVeTakipEdilenHesapla();
+  for (let i = 0; i < array.length; i++) {
+    if (array[i].user_id == userId) {
+      return array[i];
+    }
+  }
+}
+
+function roleidyegorebulGizli(roleId) {
+  return db("users")
+    .leftJoin("roles", "roles.role_id", "users.role_id")
+    .leftJoin("sorular", "sorular.soru_id", "users.soru_id")
+    .select(
+      "users.username",
+      "users.password",
+      "roles.role_name",
+      "sorular.soru_name as seçilen soru",
+      "users.soru_cevap as cevap"
+    )
+    .where("roles.role_id", roleId);
 }
 
 async function idyeGoreBul(user_id) {
@@ -81,8 +145,16 @@ async function updateSifre(username, password) {
     .update("password", hashedPassword);
 }
 
+async function updateUsername(id, username) {
+  return await db("users").where("user_id", id).update("username", username);
+}
+
+async function kullaniciSil(id) {
+  return db("users").where("user_id", Number(id)).del();
+}
+
 module.exports = {
-  bul,
+  bulGizli,
   idyeGoreBul,
   nameeGoreBul,
   nameeGoreSıfreBul,
@@ -90,4 +162,11 @@ module.exports = {
   ekleOzel,
   nameeGoreSoruBul,
   updateSifre,
+  roleidyegorebulGizli,
+  takipEdilenHesapla,
+  takipciHesapla,
+  takipciVeTakipEdilenHesapla,
+  idyegoretakipciVeTakipEdilenHesapla,
+  updateUsername,
+  kullaniciSil,
 };

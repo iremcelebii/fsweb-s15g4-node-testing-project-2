@@ -18,6 +18,8 @@ router.post(
         username: req.body.username,
         role_id: 2,
         password: hashedPassword,
+        soru_id: req.body.soru_id,
+        soru_cevap: req.body.soru_cevap,
       });
       res.status(201).json(newUser);
     } catch (err) {
@@ -96,7 +98,7 @@ router.post(
     try {
       await userModel.updateSifre(req.body.username, req.body.password);
       res.json({
-        message: "Şifreniz başarı ile değiştirilmiştir",
+        message: `Şifreniz başarı ile değiştirilmiştir, yeni şifreniz: ${req.body.password}`,
       });
     } catch (err) {
       next(err);

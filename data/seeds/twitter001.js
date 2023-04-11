@@ -16,7 +16,7 @@ exports.seed = async function (knex) {
       username: "bob",
       password: "$2a$10$dFwWjD8hi8K2I9/Y65MWi.WU0qn9eAVaiBoRSShTvuJVGw8XpsCiq", // password "1234"
       role_id: 1,
-      soru_id: 2,
+      soru_id: 3,
       soru_cevap: "Pembe",
     },
     {
@@ -30,14 +30,14 @@ exports.seed = async function (knex) {
       username: "sena",
       password: "$2a$10$dFwWjD8hi8K2I9/Y65MWi.WU0qn9eAVaiBoRSShTvuJVGw8XpsCiq", // password "1234"
       role_id: 2,
-      soru_id: 3,
+      soru_id: 2,
       soru_cevap: "Leo",
     },
     {
       username: "oğuzhan",
       password: "$2a$10$dFwWjD8hi8K2I9/Y65MWi.WU0qn9eAVaiBoRSShTvuJVGw8XpsCiq", // password "1234"
       role_id: 2,
-      soru_id: 3,
+      soru_id: 2,
       soru_cevap: "Leo",
     },
     {
@@ -51,22 +51,23 @@ exports.seed = async function (knex) {
       username: "mert",
       password: "$2a$10$dFwWjD8hi8K2I9/Y65MWi.WU0qn9eAVaiBoRSShTvuJVGw8XpsCiq", // password "1234"
       role_id: 2,
-      soru_id: 2,
+      soru_id: 3,
       soru_cevap: "Turuncu",
     },
     {
       username: "meltem",
       password: "$2a$10$dFwWjD8hi8K2I9/Y65MWi.WU0qn9eAVaiBoRSShTvuJVGw8XpsCiq", // password "1234"
       role_id: 2,
-      soru_id: 2,
+      soru_id: 3,
       soru_cevap: "Yeşil",
     },
   ]);
   await knex("follow").insert([
     {
       from_user_id: 2,
-      to_user_id: 3,
+      to_user_id: 1,
     },
+
     {
       from_user_id: 2,
       to_user_id: 4,
@@ -136,10 +137,6 @@ exports.seed = async function (knex) {
     {
       from_user_id: 7,
       to_user_id: 5,
-    },
-    {
-      from_user_id: 7,
-      to_user_id: 6,
     },
   ]);
   await knex("tweets").insert([
