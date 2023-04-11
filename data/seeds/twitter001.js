@@ -4,41 +4,62 @@ exports.seed = async function (knex) {
   await knex("roles").truncate();
 
   await knex("roles").insert([{ role_name: "admin" }, { role_name: "user" }]);
+
+  await knex("sorular").insert([
+    { soru_name: "İlkokul öğretmeninin adı" },
+    { soru_name: "İlk evcil hayvanının adı" },
+    { soru_name: "En sevdiğin renk" },
+  ]);
+
   await knex("users").insert([
     {
       username: "bob",
       password: "$2a$10$dFwWjD8hi8K2I9/Y65MWi.WU0qn9eAVaiBoRSShTvuJVGw8XpsCiq", // password "1234"
       role_id: 1,
+      soru_id: 2,
+      soru_cevap: "Pembe",
     },
     {
       username: "irem",
       password: "$2a$10$dFwWjD8hi8K2I9/Y65MWi.WU0qn9eAVaiBoRSShTvuJVGw8XpsCiq", // password "1234"
       role_id: 2,
+      soru_id: 1,
+      soru_cevap: "Melike",
     },
     {
       username: "sena",
       password: "$2a$10$dFwWjD8hi8K2I9/Y65MWi.WU0qn9eAVaiBoRSShTvuJVGw8XpsCiq", // password "1234"
       role_id: 2,
+      soru_id: 3,
+      soru_cevap: "Leo",
     },
     {
       username: "oğuzhan",
       password: "$2a$10$dFwWjD8hi8K2I9/Y65MWi.WU0qn9eAVaiBoRSShTvuJVGw8XpsCiq", // password "1234"
       role_id: 2,
+      soru_id: 3,
+      soru_cevap: "Leo",
     },
     {
       username: "batu",
       password: "$2a$10$dFwWjD8hi8K2I9/Y65MWi.WU0qn9eAVaiBoRSShTvuJVGw8XpsCiq", // password "1234"
       role_id: 2,
+      soru_id: 1,
+      soru_cevap: "Emre",
     },
     {
       username: "mert",
       password: "$2a$10$dFwWjD8hi8K2I9/Y65MWi.WU0qn9eAVaiBoRSShTvuJVGw8XpsCiq", // password "1234"
       role_id: 2,
+      soru_id: 2,
+      soru_cevap: "Turuncu",
     },
     {
       username: "meltem",
       password: "$2a$10$dFwWjD8hi8K2I9/Y65MWi.WU0qn9eAVaiBoRSShTvuJVGw8XpsCiq", // password "1234"
       role_id: 2,
+      soru_id: 2,
+      soru_cevap: "Yeşil",
     },
   ]);
   await knex("follow").insert([

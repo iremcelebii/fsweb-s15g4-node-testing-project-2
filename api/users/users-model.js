@@ -1,5 +1,5 @@
 const db = require("../../data/db-config");
-
+const bcryptjs = require("bcryptjs");
 function bul() {
   return db("users").select("user_id", "username");
 }
@@ -27,6 +27,20 @@ async function nameeGoreBul(username) {
 async function nameeGoreSıfreBul(username) {
   const user = await db("users")
     .select("username", "password")
+    .where("username", username)
+    .first();
+
+  return user;
+}
+async function nameeGoreSoruBul(username) {
+  const user = await db("users")
+    .leftJoin("sorular", "sorular.soru_id", "users.soru_id")
+    .select(
+      "users.username",
+      "users.password",
+      "sorular.soru_name",
+      "users.soru_cevap"
+    )
     .where("username", username)
     .first();
 
@@ -60,6 +74,13 @@ async function ekleOzel({ username, password, role_name }) {
   return idyeGoreBul(created_user_id);
 }
 
+async function updateSifre(username, password) {
+  const hashedPassword = bcryptjs.hashSync(password, 12);
+  return await db("users")
+    .where("username", username)
+    .update("password", hashedPassword);
+}
+
 module.exports = {
   bul,
   idyeGoreBul,
@@ -67,4 +88,6 @@ module.exports = {
   nameeGoreSıfreBul,
   ekle,
   ekleOzel,
+  nameeGoreSoruBul,
+  updateSifre,
 };

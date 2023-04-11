@@ -138,6 +138,39 @@ const sadece = (role_name) => (req, res, next) => {
   }
 };
 
+//!şifreunuttum end pointi için gerekli:
+async function soruVeCevapDogruMu(req, res, next) {
+  try {
+    const user = await userModel.nameeGoreSoruBul(req.body.username);
+    // console.log(dbdekiSifre); SADECE ŞİFRE GELMİYORMUŞ BURADAN
+    if (
+      user.soru_name !== req.body.soru_name ||
+      user.soru_cevap !== req.body.soru_cevap
+    ) {
+      res.status(401).json({ message: "Seçtiğiniz soru veya cevap yanlış" }); //yanlış şifre
+    } else {
+      next();
+    }
+  } catch (err) {
+    next(err);
+  }
+}
+async function sifreFarkliMi(req, res, next) {
+  try {
+    const user = await userModel.nameeGoreSıfreBul(req.body.username);
+    // console.log(dbdekiSifre); SADECE ŞİFRE GELMİYORMUŞ BURADAN
+    if (bcryptjs.compareSync(req.body.password, user.password)) {
+      res
+        .status(401)
+        .json({ message: "Daha önce kullanmadığınız bir şifre giriniz" }); //yanlış şifre
+    } else {
+      next();
+    }
+  } catch (err) {
+    next(err);
+  }
+}
+
 module.exports = {
   gerekliBilgilerVarMi,
   sifreYeterliMi,
@@ -147,4 +180,6 @@ module.exports = {
   sifreDogruMu,
   tokenKontrolu,
   sadece,
+  soruVeCevapDogruMu,
+  sifreFarkliMi,
 };

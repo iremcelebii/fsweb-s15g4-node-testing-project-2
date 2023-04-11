@@ -85,4 +85,23 @@ router.get("/logout", authMd.tokenKontrolu, (req, res, next) => {
   }
 });
 
+router.post(
+  "/sifremiUnuttum",
+  authMd.usernameVarmi,
+  authMd.soruVeCevapDogruMu,
+  authMd.sifreFarkliMi,
+  authMd.sifreYeterliMi,
+
+  async (req, res, next) => {
+    try {
+      await userModel.updateSifre(req.body.username, req.body.password);
+      res.json({
+        message: "Şifreniz başarı ile değiştirilmiştir",
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
 module.exports = router;

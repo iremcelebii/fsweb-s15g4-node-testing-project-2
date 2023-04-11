@@ -4,6 +4,11 @@ exports.up = function (knex) {
       roles.increments("role_id");
       roles.string("role_name", 32).notNullable().unique();
     })
+    .createTable("sorular", (roles) => {
+      roles.increments("soru_id");
+      roles.string("soru_name", 64).notNullable().unique();
+    })
+
     .createTable("users", (users) => {
       users.increments("user_id");
       users.string("username", 128).notNullable().unique();
@@ -16,6 +21,15 @@ exports.up = function (knex) {
         .inTable("roles")
         .onUpdate("RESTRICT")
         .onDelete("RESTRICT");
+      users
+        .integer("soru_id")
+        .unsigned()
+        .notNullable()
+        .references("soru_id")
+        .inTable("sorular")
+        .onUpdate("RESTRICT")
+        .onDelete("RESTRICT");
+      users.string("soru_cevap", 128).notNullable();
     })
     .createTable("follow", (follow) => {
       follow.increments("follow_id");
