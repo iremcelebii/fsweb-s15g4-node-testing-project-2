@@ -1,17 +1,68 @@
+//!Veritabanına erişim fonskiyonları:
+/*
+GET:
+  idyeGoreUserBul,
+  XeGoreUserBul,
+  userlarınGizliBilgileriniBul,
+  XegoreuserlarınGizliBilgileriniBul,
+  takipciVeTakipEdilenHesapla,
+  idyegoretakipciVeTakipEdilenHesapla,
+POST:
+  ekle,
+  ekleOzel,
+UPDATE:
+  updateSifre,
+  updateUsername,
+DELETE:
+  kullaniciSil,
+ */
+
 const db = require("../../data/db-config");
 const bcryptjs = require("bcryptjs");
 
-function bulGizli() {
+async function idyeGoreUserBul(user_id) {
+  const user = await db("users")
+    .leftJoin("roles", "roles.role_id", "users.role_id")
+    .select("users.user_id", "users.username", "roles.role_name")
+    .where("user_id", user_id)
+    .first();
+  return user;
+}
+async function XeGoreUserBul(filter) {
+  const user = await db("users")
+    .leftJoin("roles", "roles.role_id", "users.role_id")
+    .select("users.user_id", "users.username", "roles.role_name")
+    .where(filter)
+    .first();
+  return user;
+}
+
+function userlarınGizliBilgileriniBul() {
   return db("users")
     .leftJoin("roles", "roles.role_id", "users.role_id")
     .leftJoin("sorular", "sorular.soru_id", "users.soru_id")
     .select(
       "users.username",
       "users.password",
+      "roles.role_id",
       "roles.role_name",
-      "sorular.soru_name as seçilen soru",
-      "users.soru_cevap as cevap"
+      "sorular.soru_name",
+      "users.soru_cevap"
     );
+}
+function XegoreuserlarınGizliBilgileriniBul(filter) {
+  return db("users")
+    .leftJoin("roles", "roles.role_id", "users.role_id")
+    .leftJoin("sorular", "sorular.soru_id", "users.soru_id")
+    .select(
+      "users.username",
+      "users.password",
+      "roles.role_id",
+      "roles.role_name",
+      "sorular.soru_name",
+      "users.soru_cevap"
+    )
+    .where(filter);
 }
 
 function takipEdilenHesapla() {
@@ -31,17 +82,27 @@ function takipciHesapla(username) {
     .where("users.username", username)
     .first();
 }
+function tweetHesapla(username) {
+  return db("users")
+    .leftJoin("tweets", "users.user_id", "tweets.user_id")
+    .select("users.user_id", "users.username")
+    .count("tweets.tweet_id as tweetSayisi")
+    .groupBy("users.user_id")
+    .where("users.username", username)
+    .first();
+}
 
 async function takipciVeTakipEdilenHesapla() {
   let array = await takipEdilenHesapla();
   for (let i = 0; i < array.length; i++) {
     let obje = await takipciHesapla(array[i].username);
+    let obje2 = await tweetHesapla(array[i].username);
     array[i] = {
       ...array[i],
       takipEdilenSayisi: obje.takipEdilenSayisi,
+      tweetSayisi: obje2.tweetSayisi,
     };
   }
-
   return array;
 }
 
@@ -54,70 +115,19 @@ async function idyegoretakipciVeTakipEdilenHesapla(userId) {
   }
 }
 
-function roleidyegorebulGizli(roleId) {
-  return db("users")
-    .leftJoin("roles", "roles.role_id", "users.role_id")
-    .leftJoin("sorular", "sorular.soru_id", "users.soru_id")
-    .select(
-      "users.username",
-      "users.password",
-      "roles.role_name",
-      "sorular.soru_name as seçilen soru",
-      "users.soru_cevap as cevap"
-    )
-    .where("roles.role_id", roleId);
-}
-
-async function idyeGoreBul(user_id) {
-  const user = await db("users")
-    .leftJoin("roles", "roles.role_id", "users.role_id")
-    .select("users.user_id", "users.username", "roles.role_name")
-    .where("user_id", user_id)
-    .first();
-
-  return user;
-}
-
-async function nameeGoreBul(username) {
-  const user = await db("users")
-    .leftJoin("roles", "roles.role_id", "users.role_id")
-    .select("users.user_id", "users.username", "roles.role_name")
-    .where("username", username)
-    .first();
-
-  return user;
-}
-
-async function nameeGoreSıfreBul(username) {
-  const user = await db("users")
-    .select("username", "password")
-    .where("username", username)
-    .first();
-
-  return user;
-}
-async function nameeGoreSoruBul(username) {
-  const user = await db("users")
-    .leftJoin("sorular", "sorular.soru_id", "users.soru_id")
-    .select(
-      "users.username",
-      "users.password",
-      "sorular.soru_name",
-      "users.soru_cevap"
-    )
-    .where("username", username)
-    .first();
-
-  return user;
-}
-
 async function ekle(user) {
   const [id] = await db("users").insert(user);
-  const newUser = await idyeGoreBul(id);
+  const newUser = await idyeGoreUserBul(id);
   return newUser;
 }
 
-async function ekleOzel({ username, password, role_name }) {
+async function ekleOzel({
+  username,
+  password,
+  role_name,
+  soru_id,
+  soru_cevap,
+}) {
   let created_user_id;
   await db.transaction(async (trx) => {
     let role_id_to_use;
@@ -132,10 +142,12 @@ async function ekleOzel({ username, password, role_name }) {
       username,
       password,
       role_id: role_id_to_use,
+      soru_id,
+      soru_cevap,
     });
     created_user_id = user_id;
   });
-  return idyeGoreBul(created_user_id);
+  return idyeGoreUserBul(created_user_id);
 }
 
 async function updateSifre(username, password) {
@@ -154,19 +166,15 @@ async function kullaniciSil(id) {
 }
 
 module.exports = {
-  bulGizli,
-  idyeGoreBul,
-  nameeGoreBul,
-  nameeGoreSıfreBul,
+  userlarınGizliBilgileriniBul,
+  idyeGoreUserBul,
   ekle,
   ekleOzel,
-  nameeGoreSoruBul,
   updateSifre,
-  roleidyegorebulGizli,
-  takipEdilenHesapla,
-  takipciHesapla,
+  XegoreuserlarınGizliBilgileriniBul,
   takipciVeTakipEdilenHesapla,
   idyegoretakipciVeTakipEdilenHesapla,
   updateUsername,
   kullaniciSil,
+  XeGoreUserBul,
 };

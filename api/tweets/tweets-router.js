@@ -2,6 +2,7 @@ const router = require("express").Router();
 const tweetsModel = require("./tweets-model");
 const twwetMd = require("./tweets-middleware");
 const userMd = require("../users/user-middleware");
+
 router.get("/", async (req, res, next) => {
   try {
     const tweets = await tweetsModel.commentveFavSayilariniBul();

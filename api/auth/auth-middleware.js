@@ -1,3 +1,18 @@
+//!Kontroller:
+/*
+  gerekliBilgilerVarMi,
+  sifreYeterliMi,
+  usernameBostami,
+  rolAdiKontrolu,
+  usernameVarmi,
+  sifreDogruMu,
+  tokenKontrolu,
+  sadece,
+  soruVeCevapDogruMu,
+  sifreFarkliMi,
+
+*/
+
 const { JWT_SECRET } = require("../secrets"); // bu secreti kullanın!
 const userModel = require("../users/users-model");
 const bcryptjs = require("bcryptjs");
@@ -12,6 +27,12 @@ async function gerekliBilgilerVarMi(req, res, next) {
       res.status(422).json({ message: "Lütfen bir kullanıcı adı giriniz" });
     } else if (!user.password) {
       res.status(422).json({ message: "Lütfen bir şifre giriniz" });
+    } else if (!user.soru_id) {
+      res.status(422).json({ message: "Lütfen bir güvenlik sorusu seçiniz" });
+    } else if (!user.soru_cevap) {
+      res
+        .status(422)
+        .json({ message: "Lütfen güvenlik sorusunu cevaplayınız" });
     } else {
       next();
     }
@@ -22,7 +43,9 @@ async function gerekliBilgilerVarMi(req, res, next) {
 //!register için
 async function usernameBostami(req, res, next) {
   try {
-    const user = await userModel.nameeGoreBul(req.body.username);
+    const user = await userModel.XeGoreUserBul({
+      "users.username": req.body.username,
+    });
     if (!user) {
       next();
     } else {
@@ -32,7 +55,7 @@ async function usernameBostami(req, res, next) {
     next(err);
   }
 }
-
+//!register için
 async function sifreYeterliMi(req, res, next) {
   try {
     const userSifre = req.body.password;
@@ -77,9 +100,9 @@ const rolAdiKontrolu = async (req, res, next) => {
 const usernameVarmi = async (req, res, next) => {
   try {
     const { username } = req.body;
-    const varMi = await userModel.nameeGoreBul(username);
-    // console.log(varMi);
-    // console.log(username);
+    const varMi = await userModel.XeGoreUserBul({
+      "users.username": username,
+    });
     if (varMi !== undefined && varMi.username == username) {
       next();
     } else {
@@ -92,9 +115,11 @@ const usernameVarmi = async (req, res, next) => {
 //!login için
 async function sifreDogruMu(req, res, next) {
   try {
-    const user = await userModel.nameeGoreSıfreBul(req.body.username);
+    const user = await userModel.XegoreuserlarınGizliBilgileriniBul({
+      "users.username": req.body.username,
+    });
     // console.log(dbdekiSifre); SADECE ŞİFRE GELMİYORMUŞ BURADAN
-    if (bcryptjs.compareSync(req.body.password, user.password)) {
+    if (bcryptjs.compareSync(req.body.password, user[0].password)) {
       next();
     } else {
       res.status(401).json({ message: "Kullanıcı adı veya şifre yanlış" }); //yanlış şifre
@@ -141,11 +166,13 @@ const sadece = (role_name) => (req, res, next) => {
 //!şifreunuttum end pointi için gerekli:
 async function soruVeCevapDogruMu(req, res, next) {
   try {
-    const user = await userModel.nameeGoreSoruBul(req.body.username);
-    // console.log(dbdekiSifre); SADECE ŞİFRE GELMİYORMUŞ BURADAN
+    const user = await userModel.XegoreuserlarınGizliBilgileriniBul({
+      "users.username": req.body.username,
+    });
+
     if (
-      user.soru_name !== req.body.soru_name ||
-      user.soru_cevap !== req.body.soru_cevap
+      user[0].soru_name !== req.body.soru_name ||
+      user[0].soru_cevap !== req.body.soru_cevap
     ) {
       res.status(401).json({ message: "Seçtiğiniz soru veya cevap yanlış" }); //yanlış şifre
     } else {
@@ -157,9 +184,11 @@ async function soruVeCevapDogruMu(req, res, next) {
 }
 async function sifreFarkliMi(req, res, next) {
   try {
-    const user = await userModel.nameeGoreSıfreBul(req.body.username);
+    const user = await userModel.XegoreuserlarınGizliBilgileriniBul({
+      "users.username": req.body.username,
+    });
     // console.log(dbdekiSifre); SADECE ŞİFRE GELMİYORMUŞ BURADAN
-    if (bcryptjs.compareSync(req.body.password, user.password)) {
+    if (bcryptjs.compareSync(req.body.password, user[0].password)) {
       res
         .status(401)
         .json({ message: "Daha önce kullanmadığınız bir şifre giriniz" }); //yanlış şifre

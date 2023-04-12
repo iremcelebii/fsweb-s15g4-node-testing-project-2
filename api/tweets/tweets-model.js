@@ -1,33 +1,24 @@
+//!Veritabanına erişim fonskiyonları:
+/*
+GET:
+  idyeGoreUserBul,
+  XeGoreUserBul,
+  userlarınGizliBilgileriniBul,
+  XegoreuserlarınGizliBilgileriniBul,
+  takipciVeTakipEdilenHesapla,
+  idyegoretakipciVeTakipEdilenHesapla,
+POST:
+  ekle,
+  ekleOzel,
+UPDATE:
+  updateSifre,
+  updateUsername,
+DELETE:
+  kullaniciSil,
+ */
+
 const db = require("../../data/db-config");
 
-function commentleriBul() {
-  return db("tweets")
-    .leftJoin("users", "users.user_id", "tweets.user_id")
-    .leftJoin("comments", "comments.tweet_id", "tweets.tweet_id")
-    .select(
-      "users.username",
-      "tweets.tweet_content",
-      "tweets.tweet_id",
-      "comments.comment_id",
-      "comments.comment_content",
-      "comments.from_user_id as Yorumuyazan"
-    );
-}
-
-function XegorecommentleriBul(filtreObje) {
-  return db("tweets")
-    .leftJoin("users", "users.user_id", "tweets.user_id")
-    .leftJoin("comments", "comments.tweet_id", "tweets.tweet_id")
-    .select(
-      "users.username",
-      "tweets.tweet_content",
-      "tweets.tweet_id",
-      "comments.comment_id",
-      "comments.comment_content",
-      "comments.from_user_id as Yorumuyazan"
-    )
-    .where(filtreObje);
-}
 function commentSayisiniBul() {
   return db("tweets")
     .leftJoin("users", "users.user_id", "tweets.user_id")
@@ -36,43 +27,6 @@ function commentSayisiniBul() {
     .count("comments.comment_id as ToplamYorumSayisi")
     .groupBy("tweets.tweet_id");
 }
-function XegoreCommentSayisiniBul(filtreObje) {
-  return db("tweets")
-    .leftJoin("users", "users.user_id", "tweets.user_id")
-    .leftJoin("comments", "comments.tweet_id", "tweets.tweet_id")
-    .select("users.username", "tweets.tweet_content", "tweets.tweet_id")
-    .count("comments.comment_id as ToplamYorumSayisi")
-    .groupBy("tweets.tweet_id")
-    .where(filtreObje);
-}
-//!---------------------------------------------------------------------------------
-function favlariBul() {
-  return db("tweets")
-    .leftJoin("users", "users.user_id", "tweets.user_id")
-    .leftJoin("favs", "favs.tweet_id", "tweets.tweet_id")
-    .select(
-      "users.username",
-      "tweets.tweet_content",
-      "tweets.tweet_id",
-      "favs.fav_id",
-      "favs.from_user_id as Begenen"
-    );
-}
-
-function XegorefavlariBul(filtreObje) {
-  return db("tweets")
-    .leftJoin("users", "users.user_id", "tweets.user_id")
-    .leftJoin("favs", "favs.tweet_id", "tweets.tweet_id")
-    .select(
-      "users.username",
-      "tweets.tweet_content",
-      "tweets.tweet_id",
-      "favs.fav_id",
-      "favs.from_user_id as Begenen"
-    )
-    .where(filtreObje);
-}
-
 function favSayisiniBul() {
   return db("tweets")
     .leftJoin("users", "users.user_id", "tweets.user_id")
@@ -81,17 +35,6 @@ function favSayisiniBul() {
     .count("favs.fav_id as ToplamFavSayisi")
     .groupBy("tweets.tweet_id");
 }
-
-function XegoreFavSayisiniBul(filtreObje) {
-  return db("tweets")
-    .leftJoin("users", "users.user_id", "tweets.user_id")
-    .leftJoin("favs", "favs.tweet_id", "tweets.tweet_id")
-    .select("users.username", "tweets.tweet_content", "tweets.tweet_id")
-    .count("favs.fav_id as ToplamFavSayisi")
-    .groupBy("tweets.tweet_id")
-    .where(filtreObje);
-}
-//!---------------------------------------------------------------------------------
 async function commentveFavSayilariniBul() {
   const commentler = await commentSayisiniBul();
   const favlar = await favSayisiniBul();
@@ -111,6 +54,25 @@ async function commentveFavSayilariniBul() {
   return temeltablo;
 }
 
+//!-------------------------------------------------------------
+function XegoreFavSayisiniBul(filtreObje) {
+  return db("tweets")
+    .leftJoin("users", "users.user_id", "tweets.user_id")
+    .leftJoin("favs", "favs.tweet_id", "tweets.tweet_id")
+    .select("users.username", "tweets.tweet_content", "tweets.tweet_id")
+    .count("favs.fav_id as ToplamFavSayisi")
+    .groupBy("tweets.tweet_id")
+    .where(filtreObje);
+}
+function XegoreCommentSayisiniBul(filtreObje) {
+  return db("tweets")
+    .leftJoin("users", "users.user_id", "tweets.user_id")
+    .leftJoin("comments", "comments.tweet_id", "tweets.tweet_id")
+    .select("users.username", "tweets.tweet_content", "tweets.tweet_id")
+    .count("comments.comment_id as ToplamYorumSayisi")
+    .groupBy("tweets.tweet_id")
+    .where(filtreObje);
+}
 async function XegoreCommentveFavSayilariniBul(filtreObje) {
   const favlar = await XegoreFavSayisiniBul(filtreObje);
   const commentler = await XegoreCommentSayisiniBul(filtreObje);
@@ -156,6 +118,35 @@ async function ismegoreCommentveFavSayilariniBul(username) {
     });
     return response;
   }
+}
+
+function XegorecommentleriBul(filtreObje) {
+  return db("tweets")
+    .leftJoin("users", "users.user_id", "tweets.user_id")
+    .leftJoin("comments", "comments.tweet_id", "tweets.tweet_id")
+    .select(
+      "users.username",
+      "tweets.tweet_content",
+      "tweets.tweet_id",
+      "comments.comment_id",
+      "comments.comment_content",
+      "comments.from_user_id as Yorumuyazan"
+    )
+    .where(filtreObje);
+}
+
+function XegorefavlariBul(filtreObje) {
+  return db("tweets")
+    .leftJoin("users", "users.user_id", "tweets.user_id")
+    .leftJoin("favs", "favs.tweet_id", "tweets.tweet_id")
+    .select(
+      "users.username",
+      "tweets.tweet_content",
+      "tweets.tweet_id",
+      "favs.fav_id",
+      "favs.from_user_id as Begenen"
+    )
+    .where(filtreObje);
 }
 
 async function ismegoreCommentveFavlariBul(username) {

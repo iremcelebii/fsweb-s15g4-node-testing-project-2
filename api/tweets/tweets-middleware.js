@@ -24,7 +24,7 @@ const tweetOkisiyeMiAit = async (req, res, next) => {
 const tweetVarMi = async (req, res, next) => {
   try {
     const tweets = await tweetsModel.XegoreCommentveFavSayilariniBul({
-      "users.user_id": req.decodedJWT.user_id,
+      "users.username": req.body.username,
     });
 
     for (let i = 0; i < tweets.length; i++) {

@@ -1,16 +1,24 @@
+//!End pointler:
+/*
+  /register,       : Default olarak user rolü ile yeni kullanıcı kaydeder
+  /register/ozel,  : Rol belirtilerek yeni kullanıcı kaydeder
+  login,           :
+  logout,          :
+  sifremiUnuttum   :
+*/
+
 const router = require("express").Router();
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../secrets"); // bu secret'ı kullanın!
-
 const userModel = require("../users/users-model");
 const authMd = require("./auth-middleware");
 
 router.post(
   "/register",
   authMd.gerekliBilgilerVarMi,
-  authMd.sifreYeterliMi,
   authMd.usernameBostami,
+  authMd.sifreYeterliMi,
   async (req, res, next) => {
     try {
       const hashedPassword = bcryptjs.hashSync(req.body.password, 12);
@@ -42,6 +50,8 @@ router.post(
         username: newUsername,
         role_name: req.body.role_name,
         password: hashedPassword,
+        soru_id: req.body.soru_id,
+        soru_cevap: req.body.soru_cevap,
       });
       res.status(201).json(newUser);
     } catch (err) {
@@ -56,7 +66,9 @@ router.post(
   authMd.sifreDogruMu,
   async (req, res, next) => {
     try {
-      const user = await userModel.nameeGoreBul(req.body.username);
+      const user = await userModel.XeGoreUserBul({
+        "users.username": req.body.username,
+      });
       //!TOKEN I TANIMLAYALIM
       const payload = {
         user_id: user.user_id,

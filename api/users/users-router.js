@@ -1,11 +1,22 @@
+//!End pointler:
+/*
+  /secret,          :  Tüm kullanıcıların gizli bilgilerini listeler (password, role, güvenlik sorusu ve cevabı)  
+  /secret/role/:id, :  Rolü user olan tüm kullanıcıların gizli bilgilerini listeler (password, role, güvenlik sorusu ve cevabı)  
+  /,                :  Tüm kullanıcıların gizli olmayan bilgilerini listeler (username, takipciSayisi, takipEdilenSayisi ve tweetSayisi) 
+  /:id,             :  X id'li kullanıcının gizli olmayan bilgilerini listeler (username, takipciSayisi, takipEdilenSayisi ve tweetSayisi) 
+  /usernameChange   :
+  /passwordChange   :
+  /removeUser       :
+*/
+
 const router = require("express").Router();
 const userModel = require("./users-model");
 const authMd = require("../auth/auth-middleware");
 const userMd = require("./user-middleware");
 
-router.get("/", authMd.sadece("admin"), async (req, res, next) => {
+router.get("/secret", authMd.sadece("admin"), async (req, res, next) => {
   try {
-    const users = await userModel.bulGizli();
+    const users = await userModel.userlarınGizliBilgileriniBul();
     res.json(users);
   } catch (err) {
     next(err);
@@ -13,13 +24,15 @@ router.get("/", authMd.sadece("admin"), async (req, res, next) => {
 });
 
 router.get(
-  "/role/:id",
+  "/secret/role/:id",
   userMd.roleIdVarmi,
   authMd.sadece("admin"),
   async (req, res, next) => {
     try {
       const roleId = req.params.id;
-      const users = await userModel.roleidyegorebulGizli(roleId);
+      const users = await userModel.XegoreuserlarınGizliBilgileriniBul({
+        "roles.role_id": roleId,
+      });
       res.json(users);
     } catch (err) {
       next(err);
@@ -27,7 +40,7 @@ router.get(
   }
 );
 
-router.get("/follow", authMd.sadece("admin"), async (req, res, next) => {
+router.get("/", authMd.sadece("admin"), async (req, res, next) => {
   try {
     let response = await userModel.takipciVeTakipEdilenHesapla();
     res.json(response);
@@ -36,9 +49,9 @@ router.get("/follow", authMd.sadece("admin"), async (req, res, next) => {
   }
 });
 
-router.get("/follow/:id", userMd.userIdVarmi, async (req, res, next) => {
+router.get("/:id", userMd.userIdVarmi, async (req, res, next) => {
   try {
-    userId = req.params.id;
+    const userId = req.params.id;
     let response = await userModel.idyegoretakipciVeTakipEdilenHesapla(userId);
     res.json(response);
   } catch (err) {
