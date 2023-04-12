@@ -157,7 +157,7 @@
 2.  yeni bir kullanıcı ekleyeceğiz. user-model.js de fonksiyonu yazalım
     create fonsiyonunu yazmadan önce genelde getbyid fonksiyonunu da yazarız
 
-    async function idyeGoreBul(user_id) {
+    async function idyeGoreUserBul(user_id) {
     const user = await db("users")
     .select("user_id", "username")
     .where("user_id", user_id)
@@ -166,7 +166,7 @@
 
     async function ekle(user) {
     const [id] = await db("users").insert(user);
-    const newUser = await idyeGoreBul(id);
+    const newUser = await idyeGoreUserBul(id);
     return newUser;}
 
 3.  yeni kullanıcı bilgileri nereden gelecek? auth/register end pointinden
