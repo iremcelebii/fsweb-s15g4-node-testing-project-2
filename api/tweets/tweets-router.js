@@ -1,19 +1,49 @@
 const router = require("express").Router();
 const tweetsModel = require("./tweets-model");
 const twwetMd = require("./tweets-middleware");
+const userMd = require("../users/user-middleware");
 router.get("/", async (req, res, next) => {
   try {
-    const tweets = await tweetsModel.commentveFavlariBul();
+    const tweets = await tweetsModel.commentveFavSayilariniBul();
     res.json(tweets);
   } catch (err) {
     next(err);
   }
 });
 
-router.get("/:id", async (req, res, next) => {
+router.post("/tweetlerdetay", userMd.usernameVarmi, async (req, res, next) => {
+  try {
+    const username = req.body.username;
+    const tweets = await tweetsModel.ismegoreCommentveFavlariBul(username);
+    res.json(tweets);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post(
+  "/tweetdetay/:id",
+  userMd.usernameVarmi,
+  twwetMd.tweetVarMi,
+  async (req, res, next) => {
+    try {
+      const username = req.body.username;
+      const tweetid = req.params.id;
+      const tweets = await tweetsModel.ismegoreXidliTweetinCommentveFavlariBul(
+        username,
+        tweetid
+      );
+      res.json(tweets);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+router.get("/:id", userMd.userIdVarmi, async (req, res, next) => {
   try {
     const userId = req.params.id;
-    const tweets = await tweetsModel.XegoreCommentveFavlariBul({
+    const tweets = await tweetsModel.XegoreCommentveFavSayilariniBul({
       "users.user_id": userId,
     });
     res.json(tweets);
@@ -22,10 +52,12 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.post("/aramaCubugu", async (req, res, next) => {
+router.post("/aramaCubugu", userMd.usernameVarmi, async (req, res, next) => {
   try {
     const username = req.body.username;
-    const tweets = await tweetsModel.ismegoreCommentveFavlariBul(username);
+    const tweets = await tweetsModel.ismegoreCommentveFavSayilariniBul(
+      username
+    );
     res.json(tweets);
   } catch (err) {
     next(err);

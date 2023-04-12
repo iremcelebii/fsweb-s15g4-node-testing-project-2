@@ -33,6 +33,22 @@ const userIdVarmi = async (req, res, next) => {
   }
 };
 
+const usernameVarmi = async (req, res, next) => {
+  try {
+    const username = req.body.username;
+    const varMi = await userModel.nameeGoreBul(username);
+    if (varMi !== undefined && varMi.username == username) {
+      next();
+    } else {
+      res
+        .status(401)
+        .json({ message: `${username} isminde bir kullanıcı bulunmamaktadır` });
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
 async function sifreDogruMu(req, res, next) {
   try {
     const user = await userModel.nameeGoreSıfreBul(req.decodedJWT.username);
@@ -47,4 +63,4 @@ async function sifreDogruMu(req, res, next) {
   }
 }
 
-module.exports = { roleIdVarmi, userIdVarmi, sifreDogruMu };
+module.exports = { roleIdVarmi, userIdVarmi, sifreDogruMu, usernameVarmi };
