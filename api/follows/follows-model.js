@@ -33,4 +33,33 @@ async function takipEdenHesaplar(user_id) {
   return obje;
 }
 
-module.exports = { takipEdilenHesaplar, takipEdenHesaplar };
+async function XegoretakipId(filter) {
+  return await db("users")
+    .select(
+      "follow.follow_id",
+      "follow.combine_user_id",
+      "follow.from_user_id as takipedenID",
+      "follow.to_user_id as takipedilenID",
+      "users.username as takipedilen"
+    )
+    .leftJoin("follow", "users.user_id", "follow.to_user_id")
+    .where(filter)
+    .first();
+}
+
+async function takipEt(followObj) {
+  const [id] = await db("follow").insert(followObj);
+  const newFollow = await XegoretakipId({ "follow.follow_id": id });
+  return newFollow;
+}
+async function takibiBırak(combine_user_id) {
+  return db("follow").where("combine_user_id", Number(combine_user_id)).del();
+}
+
+module.exports = {
+  takipEdilenHesaplar,
+  takipEdenHesaplar,
+  XegoretakipId,
+  takipEt,
+  takibiBırak,
+};

@@ -33,6 +33,7 @@ exports.up = function (knex) {
     })
     .createTable("follow", (follow) => {
       follow.increments("follow_id");
+      follow.integer("combine_user_id");
       follow
         .integer("from_user_id")
         .unsigned()
@@ -50,6 +51,7 @@ exports.up = function (knex) {
         .onUpdate("CASCADE")
         .onDelete("CASCADE");
     })
+
     .createTable("tweets", (tweets) => {
       tweets.increments("tweet_id");
       tweets.string("tweet_content", 128).notNullable();

@@ -64,77 +64,94 @@ exports.seed = async function (knex) {
   ]);
   await knex("follow").insert([
     {
+      combine_user_id: 21,
       from_user_id: 2,
       to_user_id: 1,
     },
 
     {
+      combine_user_id: 24,
       from_user_id: 2,
       to_user_id: 4,
     },
     {
+      combine_user_id: 25,
       from_user_id: 2,
       to_user_id: 5,
     },
     {
+      combine_user_id: 26,
       from_user_id: 2,
       to_user_id: 6,
     },
     {
+      combine_user_id: 27,
       from_user_id: 2,
       to_user_id: 7,
     },
     {
+      combine_user_id: 32,
       from_user_id: 3,
       to_user_id: 2,
     },
     {
+      combine_user_id: 34,
       from_user_id: 3,
       to_user_id: 4,
     },
 
     {
+      combine_user_id: 42,
       from_user_id: 4,
       to_user_id: 2,
     },
     {
+      combine_user_id: 43,
       from_user_id: 4,
       to_user_id: 3,
     },
     {
+      combine_user_id: 52,
       from_user_id: 5,
       to_user_id: 2,
     },
 
     {
+      combine_user_id: 56,
       from_user_id: 5,
       to_user_id: 6,
     },
     {
+      combine_user_id: 57,
       from_user_id: 5,
       to_user_id: 7,
     },
 
     {
+      combine_user_id: 62,
       from_user_id: 6,
       to_user_id: 2,
     },
 
     {
+      combine_user_id: 65,
       from_user_id: 6,
       to_user_id: 5,
     },
     {
+      combine_user_id: 67,
       from_user_id: 6,
       to_user_id: 7,
     },
 
     {
+      combine_user_id: 72,
       from_user_id: 7,
       to_user_id: 2,
     },
 
     {
+      combine_user_id: 75,
       from_user_id: 7,
       to_user_id: 5,
     },
