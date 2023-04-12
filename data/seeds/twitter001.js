@@ -187,18 +187,18 @@ exports.seed = async function (knex) {
     },
     {
       comment_content: "Meltem'in ilk tweetine Mert'ten ilk yorum",
-      tweet_id: 6,
+      tweet_id: 7,
       from_user_id: 6,
     },
     {
       comment_content: "Meltem'in ikinci tweetine İrem'den ilk yorum",
-      tweet_id: 7,
+      tweet_id: 8,
       from_user_id: 2,
     },
 
     {
       comment_content: "Meltem'in ikinci tweetine Batu'dan ikinci yorum",
-      tweet_id: 7,
+      tweet_id: 8,
       from_user_id: 5,
     },
   ]);
