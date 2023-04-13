@@ -4,9 +4,9 @@ exports.up = function (knex) {
       roles.increments("role_id");
       roles.string("role_name", 32).notNullable().unique();
     })
-    .createTable("sorular", (roles) => {
-      roles.increments("soru_id");
-      roles.string("soru_name", 64).notNullable().unique();
+    .createTable("sorular", (sorular) => {
+      sorular.increments("soru_id");
+      sorular.string("soru_name", 64).notNullable().unique();
     })
 
     .createTable("users", (users) => {
@@ -106,12 +106,13 @@ exports.up = function (knex) {
     });
 };
 
-exports.down = function (favs) {
+exports.down = function (knex) {
   return knex.schema
-    .dropTableIfExists("comments")
+    .dropTableIfExists("favs")
     .dropTableIfExists("comments")
     .dropTableIfExists("tweets")
     .dropTableIfExists("follow")
     .dropTableIfExists("users")
+    .dropTableIfExists("sorular")
     .dropTableIfExists("roles");
 };
