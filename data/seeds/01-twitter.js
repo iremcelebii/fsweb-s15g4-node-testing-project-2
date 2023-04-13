@@ -183,7 +183,7 @@ const tweets = [
     user_id: 7,
   },
 ];
-const commets = [
+const comments = [
   {
     comment_content: "İrem'in ilk tweetine Sena'dan ilk yorum",
     tweet_id: 1,
@@ -219,20 +219,21 @@ const favs = [
   { combine_fav_id: "7_5", tweet_id: 7, from_user_id: 5 },
 ];
 
-exports.roles = roles;
-exports.sorular = sorular;
-exports.users = users;
-exports.follow = follow;
-exports.tweets = tweets;
-exports.commets = commets;
-exports.favs = favs;
-
 exports.seed = async function (knex) {
+  // Deletes ALL existing entries
+  await knex("favs").truncate();
+  await knex("comments").truncate();
+  await knex("tweets").truncate();
+  await knex("follow").truncate();
+  await knex("users").truncate();
+  await knex("sorular").truncate();
+  await knex("roles").truncate();
+
   await knex("roles").insert(roles);
   await knex("sorular").insert(sorular);
   await knex("users").insert(users);
   await knex("follow").insert(follow);
   await knex("tweets").insert(tweets);
-  await knex("comments").insert(commets);
+  await knex("comments").insert(comments);
   await knex("favs").insert(favs);
 };
