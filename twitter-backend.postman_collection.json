@@ -1,0 +1,1753 @@
+{
+	"info": {
+		"_postman_id": "1be5ee08-49c5-41bb-8a60-74487dd00e19",
+		"name": "twitter-backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25708193"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "api/auth/register",
+					"item": [
+						{
+							"name": "sorunsuz",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"username\": \"irem\", \"password\": \"12345678\",\"soru_id\":\"1\",\"soru_cevap\":\"Ayşe\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/auth/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "boş username",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"username\": \"deneme1\", \"password\": \"\",\"soru_id\":\"1\",\"soru_cevap\":\"Ayşe\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/auth/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "boş şifre",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"username\": \"deneme2\", \"password\": \"\" }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/auth/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "kullanılan username",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"username\": \"deneme1\", \"password\": \"12345678\",\"soru_id\":\"1\",\"soru_cevap\":\"Ayşe\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/auth/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "kısa şifre",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"username\": \"deneme12\", \"password\": \"1234567\",\"soru_id\":\"1\",\"soru_cevap\":\"Ayşe\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/auth/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "rakamsız şifre",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"username\": \"deneme12\", \"password\": \"sifresifre\",\"soru_id\":\"1\",\"soru_cevap\":\"Ayşe\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/auth/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "api/auth/regisger/ozel",
+					"item": [
+						{
+							"name": "sorunsuz",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"username\": \"deneme2\", \"password\": \"12345678\",\"role_name\": \"admin\",\"soru_id\":\"1\",\"soru_cevap\":\"Ayşe\" }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/auth/register/ozel",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"auth",
+										"register",
+										"ozel"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "trim ve küçük harf kontrolü",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"username\": \"deneme2\", \"password\": \"12345678\",\"role_name\": \"    ADMİN         \",\"soru_id\":\"1\",\"soru_cevap\":\"Ayşe\" }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/auth/register/ozel",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"auth",
+										"register",
+										"ozel"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "boş rolename",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"username\": \"deneme3\", \"password\": \"12345678\",\"role_name\": \"\",\"soru_id\":\"1\",\"soru_cevap\":\"Ayşe\" }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/auth/register/ozel",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"auth",
+										"register",
+										"ozel"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "api/auth/login",
+					"item": [
+						{
+							"name": "sorunsuz admin girişi",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"username\": \"bob\", \"password\": \"1234\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "sorunsuz user girişi",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"username\": \"irem\", \"password\": \"irem1234\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "şifre yanlış",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"username\": \"bob\", \"password\": \"123\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "username yanlış",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"username\": \"bob1\", \"password\": \"1234\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "api/auth/logout",
+					"item": [
+						{
+							"name": "sorunsuz",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJ1c2VybmFtZSI6ImlyZW0iLCJyb2xlX25hbWUiOiJ1c2VyIiwiaWF0IjoxNjgxMTY3NTMzLCJleHAiOjE2ODEyNTM5MzN9.eAojho3agk3tDgSwrV_GWq-pcejCIOvpdlHCYjhnT0M",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/auth/logout",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "token sız",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/auth/logout",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "yanlış token",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJ1c2VybmFtZSI6ImlyZW0iLCJyb2xlX25hbWUiOiJ1c2VyIiwiaWF0IjoxNjgxMTY3NTMzLCJleHAiOjE2ODEyNTM5MzN9.eAojho3agk3tDgSwrV_GWq-pcejCIOvpdlHCYjhnT",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"username\": \"bob\", \"password\": \"123\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/auth/logout",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "api/auth/sifremiUnuttum",
+					"item": [
+						{
+							"name": "sorunsuz",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"username\": \"irem\", \"soru_name\": \"İlkokul öğretmeninin adı\", \"soru_cevap\":\"Ayşe\" ,\"password\":\"irem1234\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/auth/sifremiUnuttum",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"auth",
+										"sifremiUnuttum"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "aynı şifre",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"username\": \"irem\", \"soru_name\": \"İlkokul öğretmeninin adı\", \"soru_cevap\":\"Melike\" ,\"password\":\"irem1234\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/auth/sifremiUnuttum",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"auth",
+										"sifremiUnuttum"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "şifre eksik",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"username\": \"irem\", \"soru_name\": \"İlkokul öğretmeninin adı\", \"soru_cevap\":\"Melike\" ,\"password\":\"irem\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/auth/sifremiUnuttum",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"auth",
+										"sifremiUnuttum"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "olmayan username",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"username\": \"irem1\", \"soru_name\": \"İlkokul öğretmeninin adı\", \"soru_cevap\":\"Melike\" ,\"password\":\"irem1234\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/auth/sifremiUnuttum",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"auth",
+										"sifremiUnuttum"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "soru yanlış",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"username\": \"irem\", \"soru_name\": \"En sevdiğin renk\", \"soru_cevap\":\"Pembe\" ,\"password\":\"irem1234\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/auth/sifremiUnuttum",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"auth",
+										"sifremiUnuttum"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "cevap yanlış",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"username\": \"irem\", \"soru_name\": \"İlkokul öğretmeninin adı\", \"soru_cevap\":\"Ömer\" ,\"password\":\"irem1234\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/auth/sifremiUnuttum",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"auth",
+										"sifremiUnuttum"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "/api/users/secret",
+					"item": [
+						{
+							"name": "sorunsuz",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const payload =JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"token\", payload.token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImJvYiIsInJvbGVfbmFtZSI6ImFkbWluIiwiaWF0IjoxNjgxMzIwMDY3LCJleHAiOjE2ODE0MDY0Njd9.434jR6QDN2zrcg9TK_6lP205biiDGOR92EKbj8Aj0DA",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{API_ADDRESS}}:{{PORT}}/api/users/secret",
+									"host": [
+										"{{API_ADDRESS}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"api",
+										"users",
+										"secret"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "geçersiz rol",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const payload =JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"token\", payload.token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJ1c2VybmFtZSI6ImlyZW0iLCJyb2xlX25hbWUiOiJ1c2VyIiwiaWF0IjoxNjgxNDA0MDYzLCJleHAiOjE2ODE0OTA0NjN9.Vwrl7HSyNlI_10F7L4nIN5Gm49oEnNOapV2Dhk4ohBA",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{API_ADDRESS}}:{{PORT}}/api/users/secret",
+									"host": [
+										"{{API_ADDRESS}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"api",
+										"users",
+										"secret"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "tokensız",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const payload =JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"token\", payload.token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxLCJ1c2VybmFtZSI6ImJvYiIsInJvbGVfbmFtZSI6ImFkbWluIiwiaWF0IjoxNjgwNzgyMzQ4LCJleHAiOjE2ODA4Njg3NDh9.FPCBtOgyZyrrF0y_b2iSRlf-gBujzg5NDPxH3gaGjzE",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{API_ADDRESS}}:{{PORT}}/api/users/secret",
+									"host": [
+										"{{API_ADDRESS}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"api",
+										"users",
+										"secret"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "/api/users/secret/role/id",
+					"item": [
+						{
+							"name": "sorunsuz",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const payload =JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"token\", payload.token)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImJvYiIsInJvbGVfbmFtZSI6ImFkbWluIiwiaWF0IjoxNjgxMzIwMDY3LCJleHAiOjE2ODE0MDY0Njd9.434jR6QDN2zrcg9TK_6lP205biiDGOR92EKbj8Aj0DA",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{API_ADDRESS}}:{{PORT}}/api/users/secret/role/2",
+									"host": [
+										"{{API_ADDRESS}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"api",
+										"users",
+										"secret",
+										"role",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "olmayan rol",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const payload =JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"token\", payload.token)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImJvYiIsInJvbGVfbmFtZSI6ImFkbWluIiwiaWF0IjoxNjgxMzIwMDY3LCJleHAiOjE2ODE0MDY0Njd9.434jR6QDN2zrcg9TK_6lP205biiDGOR92EKbj8Aj0DA",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{API_ADDRESS}}:{{PORT}}/api/users/secret/role/20",
+									"host": [
+										"{{API_ADDRESS}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"api",
+										"users",
+										"secret",
+										"role",
+										"20"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "geçersiz rol",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const payload =JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"token\", payload.token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJ1c2VybmFtZSI6ImlyZW0iLCJyb2xlX25hbWUiOiJ1c2VyIiwiaWF0IjoxNjgxNDA0MjM0LCJleHAiOjE2ODE0OTA2MzR9.hNRXMGd3Sio1mBeuKqVOc4-O2fJMq1bd6m46wiAIOjo",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{API_ADDRESS}}:{{PORT}}/api/users/secret/role/2",
+									"host": [
+										"{{API_ADDRESS}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"api",
+										"users",
+										"secret",
+										"role",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "/api/users",
+					"item": [
+						{
+							"name": "sorunsuz tüm kullanıcıları listele",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImJvYiIsInJvbGVfbmFtZSI6ImFkbWluIiwiaWF0IjoxNjgxNDA0NDA4LCJleHAiOjE2ODE0OTA4MDh9.Gx_M2PxITYGOa2ERgU6wQC37BPPGCUbhnTVoSs5TEjc",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{API_ADDRESS}}:{{PORT}}/api/users/",
+									"host": [
+										"{{API_ADDRESS}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"api",
+										"users",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "geçersiz rol",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const payload =JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"token\", payload.token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJ1c2VybmFtZSI6ImlyZW0iLCJyb2xlX25hbWUiOiJ1c2VyIiwiaWF0IjoxNjgxNDA0NDAzLCJleHAiOjE2ODE0OTA4MDN9._mxakF15f1Rm2elgtUfLc8DgIcwbUXjcVnIEOcp3d4Q",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{API_ADDRESS}}:{{PORT}}/api/users/",
+									"host": [
+										"{{API_ADDRESS}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"api",
+										"users",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "id li kullanıcıyı getir",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJ1c2VybmFtZSI6ImlyZW0iLCJyb2xlX25hbWUiOiJ1c2VyIiwiaWF0IjoxNjgxNDA0NDAzLCJleHAiOjE2ODE0OTA4MDN9._mxakF15f1Rm2elgtUfLc8DgIcwbUXjcVnIEOcp3d4Q",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{API_ADDRESS}}:{{PORT}}/api/users/7",
+									"host": [
+										"{{API_ADDRESS}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"api",
+										"users",
+										"7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "olmayan id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJ1c2VybmFtZSI6ImlyZW0iLCJyb2xlX25hbWUiOiJ1c2VyIiwiaWF0IjoxNjgxNDA0NDAzLCJleHAiOjE2ODE0OTA4MDN9._mxakF15f1Rm2elgtUfLc8DgIcwbUXjcVnIEOcp3d4Q",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{API_ADDRESS}}:{{PORT}}/api/users/70",
+									"host": [
+										"{{API_ADDRESS}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"api",
+										"users",
+										"70"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "İsim ve şifre değişiklikleri",
+					"item": [
+						{
+							"name": "usernameChange",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJ1c2VybmFtZSI6ImlyZW0iLCJyb2xlX25hbWUiOiJ1c2VyIiwiaWF0IjoxNjgxNDA0NDAzLCJleHAiOjE2ODE0OTA4MDN9._mxakF15f1Rm2elgtUfLc8DgIcwbUXjcVnIEOcp3d4Q",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"username\":\"irem\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_ADDRESS}}:{{PORT}}/api/users/usernameChange",
+									"host": [
+										"{{API_ADDRESS}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"api",
+										"users",
+										"usernameChange"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "passwordChange",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMSwidXNlcm5hbWUiOiJpcmVtIiwicm9sZV9uYW1lIjoidXNlciIsImlhdCI6MTY4MTQwNTc2OSwiZXhwIjoxNjgxNDkyMTY5fQ.WRwml782S7N1xq0DYiWwtP04aJsMGIMsE1fbQ8JgnhE",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"password\":\"irem123456789\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_ADDRESS}}:{{PORT}}/api/users/passwordChange",
+									"host": [
+										"{{API_ADDRESS}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"api",
+										"users",
+										"passwordChange"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Kullanıcı silme",
+					"item": [
+						{
+							"name": "sorunsuz",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJ1c2VybmFtZSI6ImlyZW0iLCJyb2xlX25hbWUiOiJ1c2VyIiwiaWF0IjoxNjgxNDA1MzA1LCJleHAiOjE2ODE0OTE3MDV9.IBXRoGu6IEemBbjaMkhnBU4VNqD43HNXs0UmmAAWRBs",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"password\":\"irem123456789\"}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_ADDRESS}}:{{PORT}}/api/users/removeUser",
+									"host": [
+										"{{API_ADDRESS}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"api",
+										"users",
+										"removeUser"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "tweets",
+			"item": [
+				{
+					"name": "tüm tweetler",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImJvYiIsInJvbGVfbmFtZSI6ImFkbWluIiwiaWF0IjoxNjgxMzM1NTI3LCJleHAiOjE2ODE0MjE5Mjd9.eV4T9MXWetBQceIG2Iq1ZAUDnHyELu2BBoJlAP6uXdU",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9001/api/tweets",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9001",
+							"path": [
+								"api",
+								"tweets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "x id li kişinin tweetleri",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImJvYiIsInJvbGVfbmFtZSI6ImFkbWluIiwiaWF0IjoxNjgxMjQ0NzQ2LCJleHAiOjE2ODEzMzExNDZ9.irSaoJu1zO036_4Myfs0bP90Qxn6H15GITpmaB3i3u0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9001/api/tweets/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9001",
+							"path": [
+								"api",
+								"tweets",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "x id li kişinin tweetleri2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImJvYiIsInJvbGVfbmFtZSI6ImFkbWluIiwiaWF0IjoxNjgxMjQ0NzQ2LCJleHAiOjE2ODEzMzExNDZ9.irSaoJu1zO036_4Myfs0bP90Qxn6H15GITpmaB3i3u0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"meltem\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9001/api/tweets/aramaCubugu",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9001",
+							"path": [
+								"api",
+								"tweets",
+								"aramaCubugu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "x id li kişinin tweetleri2 DETAY",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImJvYiIsInJvbGVfbmFtZSI6ImFkbWluIiwiaWF0IjoxNjgxMjQ0NzQ2LCJleHAiOjE2ODEzMzExNDZ9.irSaoJu1zO036_4Myfs0bP90Qxn6H15GITpmaB3i3u0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"meltem\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9001/api/tweets/tweetlerdetay",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9001",
+							"path": [
+								"api",
+								"tweets",
+								"tweetlerdetay"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "x id li x idli tweeti DETAY",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImJvYiIsInJvbGVfbmFtZSI6ImFkbWluIiwiaWF0IjoxNjgxMzMxNzE4LCJleHAiOjE2ODE0MTgxMTh9.WxAUiCLG14ODuatFKZttmSf35VX1txsmYGjoYf3ahS4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"meltem\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9001/api/tweets/tweetdetay/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9001",
+							"path": [
+								"api",
+								"tweets",
+								"tweetdetay",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "yeni tweet",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImJvYiIsInJvbGVfbmFtZSI6ImFkbWluIiwiaWF0IjoxNjgxMzM1NTI3LCJleHAiOjE2ODE0MjE5Mjd9.eV4T9MXWetBQceIG2Iq1ZAUDnHyELu2BBoJlAP6uXdU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"tweet_content\":\"bob twit atıyor\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9001/api/tweets/yaz",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9001",
+							"path": [
+								"api",
+								"tweets",
+								"yaz"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tweet silme",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImJvYiIsInJvbGVfbmFtZSI6ImFkbWluIiwiaWF0IjoxNjgxMzM1NTI3LCJleHAiOjE2ODE0MjE5Mjd9.eV4T9MXWetBQceIG2Iq1ZAUDnHyELu2BBoJlAP6uXdU",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9001/api/tweets/sil/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9001",
+							"path": [
+								"api",
+								"tweets",
+								"sil",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "follow",
+			"item": [
+				{
+					"name": "takipEdilenler",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMSwidXNlcm5hbWUiOiJpcmVtIiwicm9sZV9uYW1lIjoidXNlciIsImlhdCI6MTY4MTQwNTg2MCwiZXhwIjoxNjgxNDkyMjYwfQ.nnYWt_ddNz5LtzDT-jxj3TNhomY9Vu-_z2EEcBqz7as",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_ADDRESS}}:{{PORT}}/api/follows/takipEdilenler/2",
+							"host": [
+								"{{API_ADDRESS}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"follows",
+								"takipEdilenler",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "takipciler",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMSwidXNlcm5hbWUiOiJpcmVtIiwicm9sZV9uYW1lIjoidXNlciIsImlhdCI6MTY4MTQwNTg2MCwiZXhwIjoxNjgxNDkyMjYwfQ.nnYWt_ddNz5LtzDT-jxj3TNhomY9Vu-_z2EEcBqz7as",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_ADDRESS}}:{{PORT}}/api/follows/takipciler/3",
+							"host": [
+								"{{API_ADDRESS}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"follows",
+								"takipciler",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "takip etme",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMSwidXNlcm5hbWUiOiJpcmVtIiwicm9sZV9uYW1lIjoidXNlciIsImlhdCI6MTY4MTQwNTg2MCwiZXhwIjoxNjgxNDkyMjYwfQ.nnYWt_ddNz5LtzDT-jxj3TNhomY9Vu-_z2EEcBqz7as",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_ADDRESS}}:{{PORT}}/api/follows/takipEt/11",
+							"host": [
+								"{{API_ADDRESS}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"follows",
+								"takipEt",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "takibiBirak",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImJvYiIsInJvbGVfbmFtZSI6ImFkbWluIiwiaWF0IjoxNjgxMzMxNzE4LCJleHAiOjE2ODE0MTgxMTh9.WxAUiCLG14ODuatFKZttmSf35VX1txsmYGjoYf3ahS4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_ADDRESS}}:{{PORT}}/api/follows/takibiBirak/2",
+							"host": [
+								"{{API_ADDRESS}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"follows",
+								"takibiBirak",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "takipçiyi çıkar",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImJvYiIsInJvbGVfbmFtZSI6ImFkbWluIiwiaWF0IjoxNjgxMzMxNzE4LCJleHAiOjE2ODE0MTgxMTh9.WxAUiCLG14ODuatFKZttmSf35VX1txsmYGjoYf3ahS4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_ADDRESS}}:{{PORT}}/api/follows/takipciyiCikar/2",
+							"host": [
+								"{{API_ADDRESS}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"follows",
+								"takipciyiCikar",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "favs",
+			"item": [
+				{
+					"name": "begen",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImJvYiIsInJvbGVfbmFtZSI6ImFkbWluIiwiaWF0IjoxNjgxMzMxNzE4LCJleHAiOjE2ODE0MTgxMTh9.WxAUiCLG14ODuatFKZttmSf35VX1txsmYGjoYf3ahS4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_ADDRESS}}:{{PORT}}/api/favs/begen/8",
+							"host": [
+								"{{API_ADDRESS}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"favs",
+								"begen",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "begeni kaldır",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImJvYiIsInJvbGVfbmFtZSI6ImFkbWluIiwiaWF0IjoxNjgxMzMxNzE4LCJleHAiOjE2ODE0MTgxMTh9.WxAUiCLG14ODuatFKZttmSf35VX1txsmYGjoYf3ahS4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_ADDRESS}}:{{PORT}}/api/favs/begeniKaldir/8",
+							"host": [
+								"{{API_ADDRESS}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"favs",
+								"begeniKaldir",
+								"8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "comments",
+			"item": [
+				{
+					"name": "yorum yap",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImJvYiIsInJvbGVfbmFtZSI6ImFkbWluIiwiaWF0IjoxNjgxMzMxNzE4LCJleHAiOjE2ODE0MTgxMTh9.WxAUiCLG14ODuatFKZttmSf35VX1txsmYGjoYf3ahS4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"comment_content\":\"deneme\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_ADDRESS}}:{{PORT}}/api/comments/yorumYap/1",
+							"host": [
+								"{{API_ADDRESS}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"comments",
+								"yorumYap",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "yorum sil",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImJvYiIsInJvbGVfbmFtZSI6ImFkbWluIiwiaWF0IjoxNjgxMzMxNzE4LCJleHAiOjE2ODE0MTgxMTh9.WxAUiCLG14ODuatFKZttmSf35VX1txsmYGjoYf3ahS4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_ADDRESS}}:{{PORT}}/api/comments/yorumSil/8",
+							"host": [
+								"{{API_ADDRESS}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"comments",
+								"yorumSil",
+								"8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

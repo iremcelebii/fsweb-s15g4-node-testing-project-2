@@ -81,7 +81,7 @@ router.post(
   async (req, res, next) => {
     try {
       const password = req.body.password;
-      await userModel.updateUsername(req.decodedJWT.username, password);
+      await userModel.updateSifre(req.decodedJWT.username, password);
       res.json({
         message: `Şifreniz başarı ile değiştirilmiştir, yeni şifreniz: ${req.body.password}`,
       });
@@ -91,15 +91,21 @@ router.post(
   }
 );
 
-router.post("/removeUser", userMd.sifreDogruMu, async (req, res, next) => {
-  try {
-    await userModel.kullaniciSil(req.decodedJWT.user_id);
-    res.json({
-      message: "Hesap başarı ile silinmiştir",
-    });
-  } catch (err) {
-    next(err);
+router.post(
+  "/removeUser",
+  userMd.userIdVarmi2,
+  userMd.sifreDogruMu,
+
+  async (req, res, next) => {
+    try {
+      await userModel.kullaniciSil(req.decodedJWT.user_id);
+      res.json({
+        message: "Hesap başarı ile silinmiştir",
+      });
+    } catch (err) {
+      next(err);
+    }
   }
-});
+);
 
 module.exports = router;
