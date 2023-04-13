@@ -4,6 +4,7 @@ const usersRouter = require("./users/users-router.js");
 const tweetsRouter = require("./tweets/tweets-router.js");
 const followsRouter = require("./follows/follows-router.js");
 const favsRouter = require("./favs/favs-router.js");
+const commentsRouter = require("./comments/comments-router.js");
 const authMd = require("./auth/auth-middleware.js");
 
 const server = express();
@@ -14,6 +15,7 @@ server.use("/api/users", authMd.tokenKontrolu, usersRouter);
 server.use("/api/tweets", authMd.tokenKontrolu, tweetsRouter);
 server.use("/api/follows", authMd.tokenKontrolu, followsRouter);
 server.use("/api/favs", authMd.tokenKontrolu, favsRouter);
+server.use("/api/comments", authMd.tokenKontrolu, commentsRouter);
 server.use((req, res, next) => {
   res.status(404).send("Aradığınız adres bulunamadı");
 });

@@ -1,20 +1,24 @@
 //!Veritabanına erişim fonskiyonları:
 /*
 GET:
-  idyeGoreUserBul,
-  XeGoreUserBul,
-  userlarınGizliBilgileriniBul,
-  XegoreuserlarınGizliBilgileriniBul,
-  takipciVeTakipEdilenHesapla,
-  idyegoretakipciVeTakipEdilenHesapla,
+  commentSayisiniBul,
+  favSayisiniBul,
+  commentveFavSayilariniBul,
+  XegoreFavSayisiniBul,
+  XegoreCommentSayisiniBul,
+  XegoreCommentveFavSayilariniBul,
+  ismegoreCommentveFavSayilariniBul,
+  XegorecommentleriBul,
+  XegorefavlariBul,
+  ismegoreCommentveFavlariBul,
+  ismegoreXidliTweetinCommentveFavlariBul
 POST:
-  ekle,
-  ekleOzel,
+  tweetEkle,
+
 UPDATE:
-  updateSifre,
-  updateUsername,
+
 DELETE:
-  kullaniciSil,
+  tweetSil,
  */
 
 const db = require("../../data/db-config");

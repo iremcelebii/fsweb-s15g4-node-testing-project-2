@@ -4,6 +4,10 @@ async function XegorefavId(filter) {
   return await db("favs").select("favs.*").where(filter).first();
 }
 
+async function idyeGoreTweetBul(tweetid) {
+  return await db("tweets").where("tweet_id", tweetid).first();
+}
+
 async function begen(favObj) {
   const [id] = await db("favs").insert(favObj);
   const newBegeni = await XegorefavId({ "favs.fav_id": id });
@@ -17,4 +21,5 @@ module.exports = {
   XegorefavId,
   begen,
   begenKaldir,
+  idyeGoreTweetBul,
 };
