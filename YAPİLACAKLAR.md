@@ -16,7 +16,7 @@
 
         - nodemon
         - eslint      :Kodu daha düzgün yazmamızı sağlar, standartlaştırır. (npx eslint --init)
-        - jwt-decode
+        - jwt-decode   : sanırım token ın içindeki bilgileri okumak için
         - jest
         - @types/jest
         - supertest
