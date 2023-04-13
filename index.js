@@ -1,6 +1,8 @@
+//!dotenv yi yükledim bu koduda en yukarıda yazdım:
+require("dotenv").config();
 const server = require("./api/server.js");
 
-const PORT = process.env.PORT || 9001;
+const PORT = process.env.PORT || 9000;
 
 server.listen(PORT, () => {
   console.log(`${PORT} portu dinleniyor...`);
