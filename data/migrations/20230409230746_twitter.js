@@ -33,7 +33,7 @@ exports.up = function (knex) {
     })
     .createTable("follow", (follow) => {
       follow.increments("follow_id");
-      follow.integer("combine_user_id");
+      follow.string("combine_user_id");
       follow
         .integer("from_user_id")
         .unsigned()
@@ -84,9 +84,10 @@ exports.up = function (knex) {
         .onUpdate("CASCADE")
         .onDelete("CASCADE");
     })
-    .createTable("favs", (comments) => {
-      comments.increments("fav_id");
-      comments
+    .createTable("favs", (favs) => {
+      favs.increments("fav_id");
+      favs.string("combine_fav_id");
+      favs
         .integer("from_user_id")
         .unsigned()
         .notNullable()
@@ -94,7 +95,7 @@ exports.up = function (knex) {
         .inTable("users")
         .onUpdate("CASCADE")
         .onDelete("CASCADE");
-      comments
+      favs
         .integer("tweet_id")
         .unsigned()
         .notNullable()
@@ -105,8 +106,9 @@ exports.up = function (knex) {
     });
 };
 
-exports.down = function (knex) {
+exports.down = function (favs) {
   return knex.schema
+    .dropTableIfExists("comments")
     .dropTableIfExists("comments")
     .dropTableIfExists("tweets")
     .dropTableIfExists("follow")

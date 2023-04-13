@@ -53,7 +53,7 @@ async function takipEt(followObj) {
   return newFollow;
 }
 async function takibiBırak(combine_user_id) {
-  return db("follow").where("combine_user_id", Number(combine_user_id)).del();
+  return db("follow").where("combine_user_id", combine_user_id).del();
 }
 
 module.exports = {

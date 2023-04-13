@@ -64,94 +64,94 @@ exports.seed = async function (knex) {
   ]);
   await knex("follow").insert([
     {
-      combine_user_id: 21,
+      combine_user_id: "2_1",
       from_user_id: 2,
       to_user_id: 1,
     },
 
     {
-      combine_user_id: 24,
+      combine_user_id: "2_4",
       from_user_id: 2,
       to_user_id: 4,
     },
     {
-      combine_user_id: 25,
+      combine_user_id: "2_5",
       from_user_id: 2,
       to_user_id: 5,
     },
     {
-      combine_user_id: 26,
+      combine_user_id: "2_6",
       from_user_id: 2,
       to_user_id: 6,
     },
     {
-      combine_user_id: 27,
+      combine_user_id: "2_7",
       from_user_id: 2,
       to_user_id: 7,
     },
     {
-      combine_user_id: 32,
+      combine_user_id: "3_2",
       from_user_id: 3,
       to_user_id: 2,
     },
     {
-      combine_user_id: 34,
+      combine_user_id: "3_4",
       from_user_id: 3,
       to_user_id: 4,
     },
 
     {
-      combine_user_id: 42,
+      combine_user_id: "4_2",
       from_user_id: 4,
       to_user_id: 2,
     },
     {
-      combine_user_id: 43,
+      combine_user_id: "4_3",
       from_user_id: 4,
       to_user_id: 3,
     },
     {
-      combine_user_id: 52,
+      combine_user_id: "5_2",
       from_user_id: 5,
       to_user_id: 2,
     },
 
     {
-      combine_user_id: 56,
+      combine_user_id: "5_6",
       from_user_id: 5,
       to_user_id: 6,
     },
     {
-      combine_user_id: 57,
+      combine_user_id: "5_7",
       from_user_id: 5,
       to_user_id: 7,
     },
 
     {
-      combine_user_id: 62,
+      combine_user_id: "6_2",
       from_user_id: 6,
       to_user_id: 2,
     },
 
     {
-      combine_user_id: 65,
+      combine_user_id: "6_5",
       from_user_id: 6,
       to_user_id: 5,
     },
     {
-      combine_user_id: 67,
+      combine_user_id: "6_7",
       from_user_id: 6,
       to_user_id: 7,
     },
 
     {
-      combine_user_id: 72,
+      combine_user_id: "7_2",
       from_user_id: 7,
       to_user_id: 2,
     },
 
     {
-      combine_user_id: 75,
+      combine_user_id: "7_5",
       from_user_id: 7,
       to_user_id: 5,
     },
@@ -221,26 +221,10 @@ exports.seed = async function (knex) {
   ]);
 
   await knex("favs").insert([
-    {
-      tweet_id: 1,
-      from_user_id: 3,
-    },
-    {
-      tweet_id: 1,
-      from_user_id: 4,
-    },
-    {
-      tweet_id: 6,
-      from_user_id: 6,
-    },
-    {
-      tweet_id: 7,
-      from_user_id: 2,
-    },
-
-    {
-      tweet_id: 7,
-      from_user_id: 5,
-    },
+    { combine_fav_id: "1_3", tweet_id: 1, from_user_id: 3 },
+    { combine_fav_id: "1_4", tweet_id: 1, from_user_id: 4 },
+    { combine_fav_id: "6_6", tweet_id: 6, from_user_id: 6 },
+    { combine_fav_id: "7_2", tweet_id: 7, from_user_id: 2 },
+    { combine_fav_id: "7_5", tweet_id: 7, from_user_id: 5 },
   ]);
 };

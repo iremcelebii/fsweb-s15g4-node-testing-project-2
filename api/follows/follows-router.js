@@ -31,7 +31,7 @@ router.get(
   async (req, res, next) => {
     try {
       const takipEdilecekUser = req.params.id;
-      let yeniuniqueId = req.decodedJWT.user_id + takipEdilecekUser;
+      let yeniuniqueId = req.decodedJWT.user_id + "_" + takipEdilecekUser;
       const hdhd = await followModel.takipEt({
         combine_user_id: yeniuniqueId,
         to_user_id: takipEdilecekUser,
@@ -52,7 +52,7 @@ router.get(
   async (req, res, next) => {
     try {
       const takiptenCikilacakUser = req.params.id;
-      let yeniuniqueId = req.decodedJWT.user_id + takiptenCikilacakUser;
+      let yeniuniqueId = req.decodedJWT.user_id + "_" + takiptenCikilacakUser;
       const varMi = await followModel.XegoretakipId({
         "follow.combine_user_id": yeniuniqueId,
       });
@@ -71,11 +71,12 @@ router.get(
 router.get(
   "/takipciyiCikar/:id",
   userMd.userIdVarmi,
+  followMd.takipciDegilMi,
   async (req, res, next) => {
     try {
       const takipciListesindenCikilacakkUser = req.params.id;
       let yeniuniqueId =
-        takipciListesindenCikilacakkUser + req.decodedJWT.user_id;
+        takipciListesindenCikilacakkUser + "_" + req.decodedJWT.user_id;
       const varMi = await followModel.XegoretakipId({
         "follow.combine_user_id": yeniuniqueId,
       });

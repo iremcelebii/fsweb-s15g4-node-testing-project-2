@@ -3,11 +3,11 @@ const followModel = require("./follows-model");
 const takipEdilmisMi = async (req, res, next) => {
   try {
     const takipEdilecekUser = req.params.id;
-    let yeniuniqueId = req.decodedJWT.user_id + takipEdilecekUser;
+    let yeniuniqueId = req.decodedJWT.user_id + "_" + takipEdilecekUser;
     const varMi = await followModel.XegoretakipId({
       "follow.combine_user_id": yeniuniqueId,
     });
-    if (varMi == undefined || varMi.combine_user_id !== Number(yeniuniqueId)) {
+    if (varMi == undefined || varMi.combine_user_id !== yeniuniqueId) {
       next();
     } else {
       res.status(401).json({
@@ -22,11 +22,11 @@ const takipEdilmisMi = async (req, res, next) => {
 const takipEdilmemisMi = async (req, res, next) => {
   try {
     const takipEdilecekUser = req.params.id;
-    let yeniuniqueId = req.decodedJWT.user_id + takipEdilecekUser;
+    let yeniuniqueId = req.decodedJWT.user_id + "_" + takipEdilecekUser;
     const varMi = await followModel.XegoretakipId({
       "follow.combine_user_id": yeniuniqueId,
     });
-    if (varMi == undefined || varMi.combine_user_id !== Number(yeniuniqueId)) {
+    if (varMi == undefined || varMi.combine_user_id !== yeniuniqueId) {
       res.status(401).json({
         message: `${takipEdilecekUser} id'li kullanıcı zaten takip edilmiyor`,
       });
@@ -38,10 +38,26 @@ const takipEdilmemisMi = async (req, res, next) => {
   }
 };
 
+const takipciDegilMi = async (req, res, next) => {
+  try {
+    let yeniuniqueId = req.params.id + "_" + req.decodedJWT.user_id;
+    const varMi = await followModel.XegoretakipId({
+      "follow.combine_user_id": yeniuniqueId,
+    });
+    if (varMi == undefined || varMi.combine_user_id !== yeniuniqueId) {
+      res.status(401).json({
+        message: `${req.params.id} id'li kullanıcı zaten takipçiniz değil`,
+      });
+    } else {
+      next();
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
 const kedisiniTakipEdemez = async (req, res, next) => {
   try {
-    req.params.id;
-
     if (req.params.id == req.decodedJWT.user_id) {
       res.status(401).json({
         message: "Kullanıcı kendini takip edemez",
@@ -54,4 +70,9 @@ const kedisiniTakipEdemez = async (req, res, next) => {
   }
 };
 
-module.exports = { takipEdilmisMi, takipEdilmemisMi, kedisiniTakipEdemez };
+module.exports = {
+  takipEdilmisMi,
+  takipEdilmemisMi,
+  takipciDegilMi,
+  kedisiniTakipEdemez,
+};
